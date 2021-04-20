@@ -1,0 +1,7 @@
+site_name: Jenkins Containers
+nav:
+  - Home: index.md
+  - Build Mindset: mindset.md
+  - Processes: processes.md
+  - Repo Layouts: layouts.md
+theme: readthedocs
