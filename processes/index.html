@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Processes - Jenkins Containers</title>
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Processes";
+    var mkdocs_page_input_path = "processes.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Jenkins Containers</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mindset/">Build Mindset</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Processes</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#tagging-commits-in-image-git-repos">Tagging Commits In Image Git Repos</a></li>
+    
+
+    <li class="toctree-l2"><a href="#building-jenkins-images">Building Jenkins Images</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../layouts/">Repo Layouts</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Jenkins Containers</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Processes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="tagging-commits-in-image-git-repos">Tagging Commits In Image Git Repos</h1>
+<ul>
+<li>Current versioning schema roughly looks like this: ‘<strong>vx.x.x</strong>’, with <strong>x</strong> being some positive int. Should represent <strong>major.minor.patch</strong>, that being the intent.</li>
+<li>When tagging a point in the commit tree, the following process is in place (again, just at a best effort level). This should be followed in <strong><em>descending</em></strong> order, these are known as <strong>rules</strong>:<ol>
+<li>If the <strong>Dockerfile</strong> changed as part of a new commit, then the image has changed and the tag should be incremented and assigned to the new commit.</li>
+<li>If some part of an image file system has changed (e.g. <strong>casc.yaml</strong> that should be in the <strong>$JENKINS_HOME</strong>), then the most recent tag (e.g. if v1.0.0 and v1.0.1 exist, v1.0.1 would be the most recent tag) should be removed from its previous commit and reassigned to the new commit but not incremented. </li>
+<li>If the <strong>Dockerfile</strong> has not changed, and no part of an image’s file system has changed, then no tagging needs to occur with the new commit.<ul>
+<li>To follow this <strong>rule</strong>, if a base image changes, the child image does not need to increment/reassign its tag.</li>
+<li><strong><em>EXTRA NOTE</em></strong>: Jenkins Images built for a particular version can be from a commit that follows <strong>rule (ii)</strong> up to any other commit that follows <strong>rule (i)</strong>/<strong>rule (ii)</strong>. Any commits existing between them are assumed to follow <strong>rule (iii)</strong> and can be used by that particular Jenkins Image version.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Image file system changes &gt; <strong>Dockerfile</strong> changes<ul>
+<li>This needs to be brought up because looking at <strong>rule (ii)</strong> in the above procedure list, moving a particular tag to a new commit when its file system has changed means it will be harder to know when that image changed (aka, the tag incremented) when looking through the commit tree.<ul>
+<li>Rational is that currently <strong>Dockerfiles</strong> have been skimmed down and the actual image should not change as often as its contents.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="building-jenkins-images">Building Jenkins Images</h1>
+<p><strong><em>NOTE: TAGGING COMMITS SHOULD OCCUR FIRST AND BE SORTED OUT! OTHERWISE THERE IS NO GUARANTEE AN IMAGE WILL BE IN LINE WITH ITS IMAGE GIT REPO.</em></strong></p>
+<ul>
+<li>To make the process of running a <strong>docker build</strong> easier, each <strong>Image Git Repo</strong> should provide a <strong>setup</strong> script that will prepare everything to construct a <strong>Jenkins Image</strong>. This script will more than likely utilize the <strong>jcasc.py</strong> program.<ul>
+<li>This serves two fold:<ul>
+<li>To provide a blueprint/trail for the ‘<strong>casc.yaml</strong>’ used by the <strong>Jenkins</strong> service in the container. This is so we know how the <strong>casc.yaml</strong> was created. Though again, this isn’t an image change but a <strong>Jenkins</strong> config change (meaning the file system will change with the new <strong>casc.yaml</strong>).</li>
+<li>To have fewer keystrokes used...a programmer’s goal ideally.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>docker build</strong> works here, though it should be mentioned the <strong>jcasc.py</strong> program does provide a docker-build command that provides some convenience with '--build-args' being already provided where possible.<ul>
+<li>If using just <strong>docker build</strong>, currently I also append the follow options (this is for <strong>official builds</strong> anyways):<ul>
+<li>--no-cache</li>
+<li>--build-arg</li>
+<li>BRANCH=<ul>
+<li>You will have to assign the current branch the repo is in.</li>
+</ul>
+</li>
+<li>--build-arg</li>
+<li>COMMIT=<ul>
+<li>You will have to assign a commit that the image was built off of.</li>
+</ul>
+</li>
+<li>--tag</li>
+<li>name:tag (<strong>Docker</strong> format for tags)</li>
+<li>“.” (the context to send to the <strong>Docker Daemon</strong>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../layouts/" class="btn btn-neutral float-right" title="Repo Layouts">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mindset/" class="btn btn-neutral" title="Build Mindset"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mindset/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../layouts/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

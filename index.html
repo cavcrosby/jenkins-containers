@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>Home - Jenkins Containers</title>
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Jenkins Containers</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#welcome-to-the-jenkins-containers-project">Welcome to the 'Jenkins Containers' Project</a></li>
+    
+
+    <li class="toctree-l2"><a href="#reading-notes">Reading Notes</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#types-of-jenkins-images">Types of Jenkins Images</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="mindset/">Build Mindset</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="processes/">Processes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="layouts/">Repo Layouts</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Jenkins Containers</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="welcome-to-the-jenkins-containers-project">Welcome to the 'Jenkins Containers' Project</h1>
+<p>This project site serves as a gathering point for resources
+to build Docker containers that run <a href="https://www.jenkins.io/">Jenkins</a>.</p>
+<h1 id="reading-notes">Reading Notes</h1>
+<ul>
+<li>The terms <strong><em>container</em></strong> <strong>|</strong> <strong><em>image</em></strong> might be used interchangeably, best effort to keep consistent with the notion that containers are instances of an image. Hence terminology should be appropriate where needed. <ul>
+<li>Well a container is just a writable layer on top of an image but that’s more detail than needed here.</li>
+</ul>
+</li>
+<li>Currently the only images being built are Docker images, so any notion of a <strong><em>Jenkins Image</em></strong> <strong>|</strong> <strong><em>image</em></strong> is to be assumed as a Docker container/image.</li>
+</ul>
+<h2 id="types-of-jenkins-images">Types of Jenkins Images</h2>
+<ul>
+<li>Base Image<ul>
+<li>Will contain <strong>Jenkins</strong> configurations that all children will use, e.g.<ul>
+<li>shell that the jobs will run in</li>
+<li>user account(s)</li>
+<li>global credentials<ul>
+<li>GitHub</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Child Image<ul>
+<li>The differentiation of children images will be based on the job(s) that <strong>Jenkins</strong> runs.<ul>
+<li>Based currently on <strong>jobs.toml</strong> (see <strong><a href="/layouts">Image Git Repo Layout</a></strong>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="image-git-repos">Image Git Repos</h3>
+<ol>
+<li><a href="https://github.com/reap2sow1/jenkins-docker-base">jenkins-docker-base</a><ul>
+<li>This is the base image <strong>Git repo</strong> in which other <strong>Jenkins images</strong> will be built on top of.</li>
+</ul>
+</li>
+<li><a href="https://github.com/reap2sow1/jenkins-docker-torkel">jenkins-docker-torkel</a></li>
+</ol>
+<h3 id="other-git-repos">Other Git Repos</h3>
+<ol>
+<li><a href="https://github.com/reap2sow1/jcasc.py">jcasc.py</a><ul>
+<li>Used to aid in building <strong>Jenkins images</strong>.</li>
+</ul>
+</li>
+<li><a href="https://github.com/reap2sow1/jenkins-infrastructure">jenkins-infrastructure</a><ul>
+<li>Used in miscellaneous tasks when managing a <strong>Jenkins</strong> environment.</li>
+</ul>
+</li>
+</ol>
+<h3 id="image-docker-repos">Image Docker Repos</h3>
+<ol>
+<li><a href="https://hub.docker.com/repository/docker/reap2sow1/jenkins-base">jenkins-base</a><ul>
+<li>This is the base image <strong>Docker repo</strong> in which other <strong>Jenkins images</strong> will build on top of.</li>
+</ul>
+</li>
+<li><a href="https://hub.docker.com/repository/docker/reap2sow1/jenkins-torkel">jenkins-torkel</a><ul>
+<li>Child image, contains following jobs:<ul>
+<li><a href="https://github.com/reap2sow1/jenkins-packerbuilds">jenkins-packerbuilds</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mindset/" class="btn btn-neutral float-right" title="Build Mindset">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="mindset/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2021-04-21 01:47:00
+-->
