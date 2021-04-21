@@ -19,12 +19,12 @@ to build Docker containers that run [Jenkins](https://www.jenkins.io/).
             * GitHub
 * Child Image
     * The differentiation of children images will be based on the job(s) that **Jenkins** runs.
-        * Based currently on **jobs.toml** (see **Image Git Repo Layout**)
+        * Based currently on **jobs.toml** (see **[Image Git Repo Layout](/layouts)**)
 
 ### Image Git Repos
 
 1. [jenkins-docker-base](https://github.com/reap2sow1/jenkins-docker-base)
-    * This is the base image **Git repo** in which other **Jenkins** image will build on top of.
+    * This is the base image **Git repo** in which other **Jenkins images** will be built on top of.
 2. [jenkins-docker-torkel](https://github.com/reap2sow1/jenkins-docker-torkel)
 
 ### Other Git Repos

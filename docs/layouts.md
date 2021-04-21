@@ -5,7 +5,7 @@
 * Base Image:
     * .gitignore
     * **casc.yaml** (optional)
-        * Can use a different filename. Must have ‘casc’ somewhere in its filename and yaml/yml as the filename extension.
+        * Can use a different filename. Must have ‘**casc**’ somewhere in its filename and yaml/yml as the filename extension.
     * Dockerfile
     * plugins.txt
 * Child Image:
