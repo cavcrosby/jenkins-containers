@@ -19,7 +19,7 @@ to build Docker containers that run [Jenkins](https://www.jenkins.io/).
             * GitHub
 * Child Image
     * The differentiation of children images will be based on the job(s) that **Jenkins** runs.
-        * Based currently on **jobs.toml** (see **[Image Git Repo Layout](/layouts)**)
+        * Based currently on **jobs.toml** (see **[Image Git Repo Layout](layouts.md)**)
 
 ### Image Git Repos
 
