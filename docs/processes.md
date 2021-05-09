@@ -6,7 +6,7 @@
     2. If some part of an image file system has changed (e.g. **casc.yaml** that should be in the **$JENKINS_HOME**), then the most recent tag (e.g. if v1.0.0 and v1.0.1 exist, v1.0.1 would be the most recent tag) should be removed from its previous commit and reassigned to the new commit but not incremented. 
     3. If the **Dockerfile** has not changed, and no part of an image’s file system has changed, then no tagging needs to occur with the new commit.
         * To follow this **rule**, if a base image changes, the child image does not need to increment/reassign its tag.
-        * ***EXTRA NOTE***: Jenkins Images built for a particular version can be from a commit that follows **rule (ii)** up to any other commit that follows **rule (i)**/**rule (ii)**. Any commits existing between them are assumed to follow **rule (iii)** and can be used by that particular Jenkins Image version.
+        * ***EXTRA NOTE***: Jenkins Images built for a particular version can be from any commit that follows **rule (iii)** up to any other commit that follows **rule (i)**/**rule (ii)**. Any commits existing between them are assumed to follow **rule (iii)** and can be used by that particular Jenkins Image version.
 * Image file system changes > **Dockerfile** changes
     * This needs to be brought up because looking at **rule (ii)** in the above procedure list, moving a particular tag to a new commit when its file system has changed means it will be harder to know when that image changed (aka, the tag incremented) when looking through the commit tree.
         * Rational is that currently **Dockerfiles** have been skimmed down and the actual image should not change as often as its contents.
