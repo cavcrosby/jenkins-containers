@@ -115,7 +115,7 @@
 <li>If some part of an image file system has changed (e.g. <strong>casc.yaml</strong> that should be in the <strong>$JENKINS_HOME</strong>), then the most recent tag (e.g. if v1.0.0 and v1.0.1 exist, v1.0.1 would be the most recent tag) should be removed from its previous commit and reassigned to the new commit but not incremented. </li>
 <li>If the <strong>Dockerfile</strong> has not changed, and no part of an image’s file system has changed, then no tagging needs to occur with the new commit.<ul>
 <li>To follow this <strong>rule</strong>, if a base image changes, the child image does not need to increment/reassign its tag.</li>
-<li><strong><em>EXTRA NOTE</em></strong>: Jenkins Images built for a particular version can be from a commit that follows <strong>rule (ii)</strong> up to any other commit that follows <strong>rule (i)</strong>/<strong>rule (ii)</strong>. Any commits existing between them are assumed to follow <strong>rule (iii)</strong> and can be used by that particular Jenkins Image version.</li>
+<li><strong><em>EXTRA NOTE</em></strong>: Jenkins Images built for a particular version can be from any commit that follows <strong>rule (iii)</strong> up to any other commit that follows <strong>rule (i)</strong>/<strong>rule (ii)</strong>. Any commits existing between them are assumed to follow <strong>rule (iii)</strong> and can be used by that particular Jenkins Image version.</li>
 </ul>
 </li>
 </ol>
