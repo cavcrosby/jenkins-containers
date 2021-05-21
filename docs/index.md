@@ -23,21 +23,21 @@ to build Docker containers that run [Jenkins](https://www.jenkins.io/).
 
 ### Image Git Repos
 
-1. [jenkins-docker-base](https://github.com/reap2sow1/jenkins-docker-base)
+1. [jenkins-docker-base](https://github.com/cavcrosby/jenkins-docker-base)
     * This is the base image **Git repo** in which other **Jenkins images** will be built on top of.
-2. [jenkins-docker-torkel](https://github.com/reap2sow1/jenkins-docker-torkel)
+2. [jenkins-docker-torkel](https://github.com/cavcrosby/jenkins-docker-torkel)
 
 ### Other Git Repos
 
-1. [jcasc.py](https://github.com/reap2sow1/jcasc.py)
+1. [jcasc.py](https://github.com/cavcrosby/jcasc.py)
     * Used to aid in building **Jenkins images**.
-2. [jenkins-infrastructure](https://github.com/reap2sow1/jenkins-infrastructure)
+2. [jenkins-infrastructure](https://github.com/cavcrosby/jenkins-infrastructure)
     * Used in miscellaneous tasks when managing a **Jenkins** environment.
 
 ### Image Docker Repos
 
-1. [jenkins-base](https://hub.docker.com/repository/docker/reap2sow1/jenkins-base)
+1. [jenkins-base](https://hub.docker.com/repository/docker/cavcrosby/jenkins-base)
     * This is the base image **Docker repo** in which other **Jenkins images** will build on top of.
-2. [jenkins-torkel](https://hub.docker.com/repository/docker/reap2sow1/jenkins-torkel)
+2. [jenkins-torkel](https://hub.docker.com/repository/docker/cavcrosby/jenkins-torkel)
     * Child image, contains following jobs:
-        * [jenkins-packerbuilds](https://github.com/reap2sow1/jenkins-packerbuilds)
+        * [jenkins-packerbuilds](https://github.com/cavcrosby/jenkins-packerbuilds)
