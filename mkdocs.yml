@@ -1,7 +1,13 @@
 site_name: Jenkins Containers
+site_url:
+use_directory_urls: False
 nav:
   - Home: index.md
-  - Build Mindset: mindset.md
-  - Processes: processes.md
   - Repo Layouts: layouts.md
-theme: readthedocs
+  - Processes: processes.md
+  - Build Philosophy: philosophy.md
+theme:
+    name: mkdocs
+    nav_style: dark
+extra_css:
+    - css/extra.css

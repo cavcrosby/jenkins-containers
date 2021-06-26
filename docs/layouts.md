@@ -6,6 +6,8 @@
     * .gitignore
     * **casc.yaml** (optional)
         * Can use a different filename. Must have ‘**casc**’ somewhere in its filename and yaml/yml as the filename extension.
+            * Assuming you wish to use the Dockerfile as is.
+            * Also assuming you are using the **jcasc.py** program as is.
     * Dockerfile
     * plugins.txt
 * Child Image:
