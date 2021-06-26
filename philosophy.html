@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
+        
         
         
         <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Jenkins Containers</title>
+        <title>Build Philosophy - Jenkins Containers</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
@@ -21,7 +21,7 @@
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Jenkins Containers</a>
@@ -34,7 +34,7 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
+                            <li class="navitem">
                                 <a href="index.html" class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
@@ -43,7 +43,7 @@
                             <li class="navitem">
                                 <a href="processes.html" class="nav-link">Processes</a>
                             </li>
-                            <li class="navitem">
+                            <li class="navitem active">
                                 <a href="philosophy.html" class="nav-link">Build Philosophy</a>
                             </li>
                         </ul>
@@ -55,12 +55,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href="processes.html" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="layouts.html" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -82,17 +82,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#jenkins-containers-project-site" class="nav-link">Jenkins Containers Project Site</a>
+            <li class="nav-item" data-level="2"><a href="#build-philosophy" class="nav-link">Build Philosophy</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#reading-notes" class="nav-link">Reading Notes</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#types-of-jenkins-images" class="nav-link">Types of Jenkins Images</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -100,69 +91,31 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="jenkins-containers-project-site">Jenkins Containers Project Site</h1>
-<p>This project site serves as a gathering point for resources
-to build Docker containers that run <a href="https://www.jenkins.io/">Jenkins</a>.</p>
-<h1 id="reading-notes">Reading Notes</h1>
+<h2 id="build-philosophy">Build Philosophy</h2>
 <ul>
-<li>The terms <strong><em>container</em></strong> <strong>|</strong> <strong><em>image</em></strong> might be used interchangeably, it will be of best effort to keep consistent with the notion that containers are instances of an image. Hence terminology should be appropriate where needed.</li>
-<li>Currently the only images being built are Docker images, so any notion of a <strong><em>Jenkins Image</em></strong> <strong>|</strong> <strong><em>image</em></strong> is to be assumed as a Docker container/image.</li>
-</ul>
-<h2 id="types-of-jenkins-images">Types of Jenkins Images</h2>
-<ul>
-<li>Base Image<ul>
-<li>Will contain <strong>Jenkins</strong> configurations that all children will use, e.g.<ul>
-<li>shell that the jobs will run in</li>
-<li>user account(s)</li>
-<li>global credentials<ul>
-<li>GitHub</li>
+<li>Future <strong>Jenkins Images</strong> created should adhere (assuming a <strong>Image Git/Docker</strong> repo is created like the others) to the following philosophy. The lifecycle of building a <strong>Jenkins Image</strong> is as followed:<ol>
+<li>Preimage Build<ul>
+<li>The operations needed to gather all the resources for an image build should occur here.<ul>
+<li>What this means for ‘<strong>Image Builds</strong>’: We want to ensure that <strong>Dockerfiles</strong> are easy to follow, and can be maintained. That said, with all the resources gathered in this step means that <strong>Image Builds</strong> can easily transfer over contents using the <strong>Docker context</strong>.</li>
+<li>What this means for ‘<strong>Container Runtime</strong>’: Like <strong>Image Builds</strong>, <strong>Container Runtime</strong> also benefits from having all the resources needed when at runtime. This removes a moderate amount of runtime error from occurring and ensures for a more deterministic runtime. Pulling additional resources from the network or running additional groovy scripts only complicate the runtime.</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>Image Build<ul>
+<li>To reiterate, <strong>Dockerfiles</strong> should be simple and easy to follow. Simple activities like updating packages, chmoding files, and copying files over from the <strong>Docker context</strong> are encouraged. However, mangling the image file system is not. Multistage builds are ok, but not for just running one command and gathering its results. Multistage builds should be used judiciously.</li>
 </ul>
 </li>
-<li>Child Image<ul>
-<li>The differentiation of children images will be based on the job(s) that <strong>Jenkins</strong> runs.<ul>
-<li>Based currently on <strong>jobs.toml</strong> (see <strong><a href="layouts.html">Image Git Repo Layout</a></strong>)</li>
+<li>Container Runtime<ul>
+<li>There should be a narrow scope for what a container should do at runtime. That said, the modularity of a <strong><em>Jenkins Image</em></strong> shines here, as ‘<strong>casc.yaml</strong>’ will <strong><em>heavily</em></strong> utilize environment variables to be evaluated at runtime. This allows the same image to be run differently depending on the need(s).<ul>
+<li>e.g. One way to ensure that environment variables are set at runtime for the <strong>Jenkins Image</strong> is to use docker-compose. docker-compose injects environment variables into the container runtime based on what you pass in as their values. The <strong>JCasC plugin</strong> evaluates these environment variables if they exist when looking in the ‘<strong>casc.yaml</strong>’.</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-<h3 id="image-git-repos">Image Git Repos</h3>
-<ol>
-<li><a href="https://github.com/cavcrosby/jenkins-docker-base">jenkins-docker-base</a><ul>
-<li>This is the base image <strong>Git repo</strong> in which other <strong>Jenkins images</strong> will be built on top of.</li>
-</ul>
-</li>
-<li><a href="https://github.com/cavcrosby/jenkins-docker-torkel">jenkins-docker-torkel</a></li>
-</ol>
-<h3 id="other-git-repos">Other Git Repos</h3>
-<ol>
-<li><a href="https://github.com/cavcrosby/jcasc.py">jcasc.py</a><ul>
-<li>Used to aid in building <strong>Jenkins images</strong>.</li>
-</ul>
-</li>
-<li><a href="https://github.com/cavcrosby/jenkins-infrastructure">jenkins-infrastructure</a><ul>
-<li>Used in miscellaneous tasks when managing a <strong>Jenkins</strong> environment.</li>
 </ul>
 </li>
 </ol>
-<h3 id="image-docker-repos">Image Docker Repos</h3>
-<ol>
-<li><a href="https://hub.docker.com/repository/docker/cavcrosby/jenkins-base">jenkins-base</a><ul>
-<li>Base container, built from the respective <strong>Image Git Repo</strong>.</li>
-</ul>
 </li>
-<li><a href="https://hub.docker.com/repository/docker/cavcrosby/jenkins-torkel">jenkins-torkel</a><ul>
-<li>Child container, contains following jobs:<ul>
-<li><a href="https://github.com/cavcrosby/jenkins-packerbuilds">jenkins-packerbuilds</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol></div>
+</ul></div>
             </div>
         </div>
 
@@ -240,8 +193,3 @@ to build Docker containers that run <a href="https://www.jenkins.io/">Jenkins</a
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.2.1
-Build Date UTC : 2021-06-26 04:01:02.918808+00:00
--->
