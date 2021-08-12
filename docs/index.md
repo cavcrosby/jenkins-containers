@@ -23,7 +23,7 @@ to build Docker containers that run [Jenkins](https://www.jenkins.io/).
 ### Image Git Repos
 
 1. [jenkins-docker-base](https://github.com/cavcrosby/jenkins-docker-base)
-    * This is the base image **Git repo** in which other **Jenkins images** will be built on top of.
+    * A base image **Git repo** in which other **Jenkins images** will be built on top of.
 2. [jenkins-docker-torkel](https://github.com/cavcrosby/jenkins-docker-torkel)
 
 ### Other Git Repos
