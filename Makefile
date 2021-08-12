@@ -26,7 +26,7 @@ help:
 	# inspired by the makefiles of the Linux kernel and Mercurial
 >	@echo 'Available make targets:'
 >	@echo '  build        - creates the project site into a directory called'
->	@echo '                 "${SITE_DIR}", at least by default'
+>	@echo '                 "${SITE_DIR}"'
 >	@echo '  test         - launches a web server with the project site'
 >	@echo '  deploy       - deploys the project site to a GitHub Pages branch'
 >	@echo '  clean        - remove files created by other targets'

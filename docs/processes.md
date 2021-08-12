@@ -15,20 +15,7 @@
 
 ***NOTE: TAGGING COMMITS SHOULD OCCUR FIRST AND BE SORTED OUT! OTHERWISE THERE IS NO GUARANTEE AN IMAGE WILL BE IN LINE WITH ITS IMAGE GIT REPO.***
 
-* To make the process of running a **docker build** easier, each **Image Git Repo** should provide a **setup** script that will prepare everything to construct a **Jenkins Image**. This script will more than likely utilize the **jcasc.py** program.
+* To make the process of running a **docker build** easier, each **Image Git Repo** should provide a Makefile that will prepare everything to construct a **Jenkins Image**. This script will more than likely utilize the **jcascutil** program.
     * This serves two fold:
         * To provide a blueprint/trail for the ‘**casc.yaml**’ used by the **Jenkins** service in the container. This is so we know how the **casc.yaml** was created. Though again, this isn’t an image change but a **Jenkins** config change (meaning the file system will change with the new **casc.yaml**).
         * To have fewer keystrokes used...a programmer’s goal ideally.
-* **docker build** works here, though it should be mentioned the **jcasc.py** program does provide a docker-build command that provides some convenience with '--build-args' being already provided where possible.
-    * If using just **docker build**, currently I also append the follow options (this is for **official builds** anyways):
-        * --no-cache
-        * --build-arg
-        * BRANCH=
-            * You will have to assign the current branch the repo is in.
-        * --build-arg
-        * COMMIT=
-            * You will have to assign a commit that the image was built off of.
-        * --tag
-        * name:tag (**Docker** format for tags)
-        * “.” (the context to send to the **Docker Daemon**)
-

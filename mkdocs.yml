@@ -1,4 +1,6 @@
 site_name: Jenkins Containers
+docs_dir: docs
+# site_url/use_directory_urls were set as mkdocs 1.2.1 complained otherwise
 site_url:
 use_directory_urls: False
 nav:

@@ -28,15 +28,15 @@ to build Docker containers that run [Jenkins](https://www.jenkins.io/).
 
 ### Other Git Repos
 
-1. [jcasc.py](https://github.com/cavcrosby/jcasc.py)
-    * Used to aid in building **Jenkins images**.
+1. [jcascutil](https://github.com/cavcrosby/jcascutil)
+    * Used to aid in constructing configuration as code (CasC) files for **Jenkins**.
 2. [jenkins-infrastructure](https://github.com/cavcrosby/jenkins-infrastructure)
     * Used in miscellaneous tasks when managing a **Jenkins** environment.
 
 ### Image Docker Repos
 
 1. [jenkins-base](https://hub.docker.com/repository/docker/cavcrosby/jenkins-base)
-    * Base container, built from the respective **Image Git Repo**.
+    * A base container, built from the respective **Image Git Repo**.
 2. [jenkins-torkel](https://hub.docker.com/repository/docker/cavcrosby/jenkins-torkel)
-    * Child container, contains following jobs:
+    * A child container, contains following jobs:
         * [jenkins-packerbuilds](https://github.com/cavcrosby/jenkins-packerbuilds)
