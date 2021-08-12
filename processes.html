@@ -120,30 +120,10 @@
 <h1 id="building-jenkins-images">Building Jenkins Images</h1>
 <p><strong><em>NOTE: TAGGING COMMITS SHOULD OCCUR FIRST AND BE SORTED OUT! OTHERWISE THERE IS NO GUARANTEE AN IMAGE WILL BE IN LINE WITH ITS IMAGE GIT REPO.</em></strong></p>
 <ul>
-<li>To make the process of running a <strong>docker build</strong> easier, each <strong>Image Git Repo</strong> should provide a <strong>setup</strong> script that will prepare everything to construct a <strong>Jenkins Image</strong>. This script will more than likely utilize the <strong>jcasc.py</strong> program.<ul>
+<li>To make the process of running a <strong>docker build</strong> easier, each <strong>Image Git Repo</strong> should provide a Makefile that will prepare everything to construct a <strong>Jenkins Image</strong>. This script will more than likely utilize the <strong>jcascutil</strong> program.<ul>
 <li>This serves two fold:<ul>
 <li>To provide a blueprint/trail for the ‘<strong>casc.yaml</strong>’ used by the <strong>Jenkins</strong> service in the container. This is so we know how the <strong>casc.yaml</strong> was created. Though again, this isn’t an image change but a <strong>Jenkins</strong> config change (meaning the file system will change with the new <strong>casc.yaml</strong>).</li>
 <li>To have fewer keystrokes used...a programmer’s goal ideally.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>docker build</strong> works here, though it should be mentioned the <strong>jcasc.py</strong> program does provide a docker-build command that provides some convenience with '--build-args' being already provided where possible.<ul>
-<li>If using just <strong>docker build</strong>, currently I also append the follow options (this is for <strong>official builds</strong> anyways):<ul>
-<li>--no-cache</li>
-<li>--build-arg</li>
-<li>BRANCH=<ul>
-<li>You will have to assign the current branch the repo is in.</li>
-</ul>
-</li>
-<li>--build-arg</li>
-<li>COMMIT=<ul>
-<li>You will have to assign a commit that the image was built off of.</li>
-</ul>
-</li>
-<li>--tag</li>
-<li>name:tag (<strong>Docker</strong> format for tags)</li>
-<li>“.” (the context to send to the <strong>Docker Daemon</strong>)</li>
 </ul>
 </li>
 </ul>

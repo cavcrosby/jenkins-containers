@@ -94,13 +94,13 @@
 <h1 id="image-git-repo-layout">Image Git Repo Layout</h1>
 <ul>
 <li>This is expected to change overtime. <strong><em>So don’t rely on this indefinitely.</em></strong></li>
-<li>This also should be what must be in a <strong>Image Git Repo</strong>, you may or may not find other files tracked by the repos. Will denote optional files.</li>
+<li>This should be what is expected in a <strong>Image Git Repo</strong>, you may or may not find additional files in other image repos. Will denote optional files.</li>
 <li>Base Image:<ul>
 <li>.gitignore</li>
 <li><strong>casc.yaml</strong> (optional)<ul>
-<li>Can use a different filename. Must have ‘<strong>casc</strong>’ somewhere in its filename and yaml/yml as the filename extension.<ul>
+<li>Can use a different filename. Must have ‘<strong>casc</strong>’ somewhere in its filename and '<strong>yaml' or '</strong>yml**' as the filename extension.<ul>
 <li>Assuming you wish to use the Dockerfile as is.</li>
-<li>Also assuming you are using the <strong>jcasc.py</strong> program as is.</li>
+<li>Also assuming you are using the <strong>jcascutil</strong> program as is.</li>
 </ul>
 </li>
 </ul>
@@ -118,8 +118,9 @@
 </li>
 <li>docker-compose.yaml (optional)</li>
 <li>Dockerfile</li>
+<li>Makefile</li>
 <li>jobs.toml<ul>
-<li>Used by the <strong>jcasc.py</strong> program.</li>
+<li>Used by the <strong>jcascutil</strong> program.</li>
 </ul>
 </li>
 <li>setup</li>
