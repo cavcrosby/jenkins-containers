@@ -30,7 +30,7 @@ to build Docker containers that run [Jenkins](https://www.jenkins.io/).
 
 1. [jcascutil](https://github.com/cavcrosby/jcascutil)
     * Used to aid in constructing configuration as code (CasC) files for **Jenkins**.
-2. [jenkins-infrastructure](https://github.com/cavcrosby/jenkins-infrastructure)
+2. [infrastructure](https://github.com/cavcrosby/infrastructure)
     * Used in miscellaneous tasks when managing a **Jenkins** environment.
 
 ### Image Docker Repos
